@@ -59,10 +59,6 @@ public:
     bool isPanning() const;
     bool isFullyLoaded() const;
 
-    void moveBy(const QPointF &offset);
-    void scaleBy(double scale, const QPointF &centerPixel, int milliseconds = 0);
-    void rotateBy(const QPointF &lastPosition, const QPointF &currentPosition);
-
     void resize(const QSize &size);
 
     void setSprite(const QString &name, const QImage &sprite);
@@ -73,6 +69,10 @@ public:
 
 public slots:
     void render();
+
+    void moveBy(const QPointF &offset);
+    void scaleBy(double scale, const QPointF &centerPixel, int milliseconds = 0);
+    void rotateBy(const QPointF &lastPosition, const QPointF &currentPosition);
 
 signals:
     void needsRendering();

@@ -104,7 +104,7 @@ void QFileSourcePrivate::handleUrlRequest(mbgl::Request *req)
     qreq.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 
     QSslConfiguration config = qreq.sslConfiguration();
-    config.setProtocol(QSsl::TlsV1);
+    config.setProtocol(QSsl::TlsV1_0);
     qreq.setSslConfiguration(config);
 
     data.first = m_manager.get(qreq);
