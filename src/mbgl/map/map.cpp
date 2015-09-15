@@ -11,6 +11,8 @@
 #include <mbgl/util/thread.hpp>
 #include <mbgl/util/math.hpp>
 
+#include <iostream>
+
 namespace mbgl {
 
 Map::Map(View& view_, FileSource& fileSource, MapMode mode)
@@ -26,6 +28,7 @@ Map::Map(View& view_, FileSource& fileSource, MapMode mode)
 Map::~Map() {
     resume();
     context->invoke(&MapContext::cleanup);
+    std::cout << "DESTROY mbgl::Map" << std::endl;
 }
 
 void Map::pause() {

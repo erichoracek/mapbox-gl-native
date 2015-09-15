@@ -5,6 +5,7 @@
 #include <mbgl/util/exception.hpp>
 
 #include <unistd.h>
+#include <iostream>
 
 namespace node_mbgl {
 
@@ -276,6 +277,7 @@ void NodeMap::renderFinished() {
 
             // Retain the StillImage object until the buffer is deleted.
             [](char *, void *hint) {
+                std::cout << "DESTROY Buffer" << std::endl;
                 delete reinterpret_cast<const mbgl::StillImage *>(hint);
             },
             const_cast<mbgl::StillImage *>(img.get())
@@ -352,6 +354,7 @@ NodeMap::NodeMap(v8::Local<v8::Object> options) :
 
 NodeMap::~NodeMap() {
     if (valid) release();
+    std::cout << "DESTROY node_mbgl::NodeMap" << std::endl;
 }
 
 }
