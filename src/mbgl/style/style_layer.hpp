@@ -42,8 +42,9 @@ public:
     bool hasRenderPass(RenderPass) const;
 
     // Updates the StyleProperties information in this layer by evaluating all
-    // pending transitions and applied classes in order.
-    void updateProperties(float z, const TimePoint& now, ZoomHistory &zoomHistory);
+    // pending transitions and applied classes in order. Returns true if there
+    // are pending transitions or false otherwise.
+    bool updateProperties(float z, const TimePoint& now, ZoomHistory &zoomHistory);
 
     // Sets the list of classes and creates transitions to the currently applied values.
     void setClasses(const std::vector<std::string> &class_names, const TimePoint& now,
@@ -57,10 +58,11 @@ private:
                               const TimePoint& now, const PropertyTransition &defaultTransition);
 
     // Sets the properties of this object by evaluating all pending transitions and
-    // aplied classes in order.
-    template <typename T> void applyStyleProperties(float z, const TimePoint& now, const ZoomHistory &zoomHistory);
+    // aplied classes in order. Returns true if there are pending transitions or
+    // false otherwise, if transitioned.
+    template <typename T> bool applyStyleProperties(float z, const TimePoint& now, const ZoomHistory &zoomHistory);
     template <typename T> void applyStyleProperty(PropertyKey key, T &, float z, const TimePoint& now, const ZoomHistory &zoomHistory);
-    template <typename T> void applyTransitionedStyleProperty(PropertyKey key, T &, float z, const TimePoint& now, const ZoomHistory &zoomHistory);
+    template <typename T> bool applyTransitionedStyleProperty(PropertyKey key, T &, float z, const TimePoint& now, const ZoomHistory &zoomHistory);
 
     // Removes all expired style transitions.
     void cleanupAppliedStyleProperties(const TimePoint& now);

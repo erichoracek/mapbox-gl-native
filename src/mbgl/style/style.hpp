@@ -94,6 +94,7 @@ private:
     void emitResourceLoadingFailed(std::exception_ptr error);
 
     bool shouldReparsePartialTiles = false;
+    bool hasPendingTransitions = false;
 
     Observer* observer = nullptr;
 

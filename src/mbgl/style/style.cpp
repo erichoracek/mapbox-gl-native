@@ -103,8 +103,9 @@ void Style::recalculate(float z) {
 
     zoomHistory.update(z, data.getAnimationTime());
 
+    hasPendingTransitions = false;
     for (const auto& layer : layers) {
-        layer->updateProperties(z, data.getAnimationTime(), zoomHistory);
+        hasPendingTransitions |= layer->updateProperties(z, data.getAnimationTime(), zoomHistory);
         if (!layer->bucket) {
             continue;
         }
@@ -132,7 +133,7 @@ bool Style::hasTransitions() const {
             return true;
         }
     }
-    return false;
+    return hasPendingTransitions;
 }
 
 bool Style::isLoaded() const {
