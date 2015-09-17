@@ -11,6 +11,8 @@
 #include <mbgl/util/thread.hpp>
 #include <mbgl/util/math.hpp>
 
+#include <iostream>
+
 namespace mbgl {
 
 Map::Map(View& view_, FileSource& fileSource, MapMode mode)
@@ -21,6 +23,7 @@ Map::Map(View& view_, FileSource& fileSource, MapMode mode)
 {
     view.initialize(this);
     update(Update::Dimensions);
+    std::cout << "TEST TEST" << std::endl;
 }
 
 Map::~Map() {
