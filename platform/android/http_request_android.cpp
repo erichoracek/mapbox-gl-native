@@ -75,7 +75,7 @@ private:
 
     static const int connectionError = 0;
     static const int temporaryError = 1;
-    static const int permanentError = 1;
+    static const int permanentError = 2;
 };
 
 // -------------------------------------------------------------------------------------------------
