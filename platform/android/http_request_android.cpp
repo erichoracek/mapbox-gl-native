@@ -305,22 +305,26 @@ void HTTPAndroidRequest::onResponse(int code, std::string message, std::string e
 }
 
 void HTTPAndroidRequest::onFailure(int type, std::string message) {
-    if (!response) {
-        response = std::make_unique<Response>();
-    }
+    if (message != "Canceled") {
+        if (!response) {
+            response = std::make_unique<Response>();
+        }
 
-    response->status = Response::Error;
-    response->message = message;
+        response->status = Response::Error;
+        response->message = message;
 
-    switch (type) {
-    case connectionError:
-        status = ResponseStatus::ConnectionError;
-        break;
-    case temporaryError:
-        status = ResponseStatus::TemporaryError;
-        break;
-    default:
-        status = ResponseStatus::PermanentError;
+        switch (type) {
+        case connectionError:
+            status = ResponseStatus::ConnectionError;
+            break;
+        case temporaryError:
+            status = ResponseStatus::TemporaryError;
+            break;
+        default:
+            status = ResponseStatus::PermanentError;
+        }
+    } else {
+        status = ResponseStatus::Canceled;
     }
 
     async.send();
