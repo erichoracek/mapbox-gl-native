@@ -315,10 +315,10 @@ void HTTPAndroidRequest::onFailure(int type, std::string message) {
     switch (type) {
     case connectionError:
         status = ResponseStatus::ConnectionError;
-
+        break;
     case temporaryError:
         status = ResponseStatus::TemporaryError;
-
+        break;
     default:
         status = ResponseStatus::PermanentError;
     }
